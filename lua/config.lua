@@ -15,12 +15,6 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
--- Make sure to setup `mapleader` and `maplocalleader` before
--- loading lazy.nvim so that mappings are correct.
--- This is also a good place to setup other settings (vim.opt)
-vim.g.mapleader = " "
-vim.g.maplocalleader = "\\"
-
 -- Setup lazy.nvim
 require("lazy").setup({
   spec = {
@@ -33,3 +27,32 @@ require("lazy").setup({
   -- automatically check for plugin updates
   checker = { enabled = true },
 })
+
+
+vim.diagnostic.config({
+  underline = true,
+  virtual_text = true,
+  signs = true,
+  update_in_insert = false,
+  severity_sort = true,
+})
+
+-- Open neo-tree automatically when nvim is launched with a directory
+vim.api.nvim_create_autocmd('VimEnter', {
+  once = true,
+  callback = function()
+    local arg = vim.fn.argv(0)
+    if arg and arg ~= '' and vim.fn.isdirectory(arg) == 1 then
+      vim.cmd('Neotree show dir=' .. vim.fn.fnameescape(vim.fn.fnamemodify(arg, ':p')))
+    end
+  end,
+})
+
+-- terminal keymaps
+vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
+vim.keymap.set('n', '<leader>rr', ':split | resize 15 | terminal cabal v2-repl<CR>i', { desc = 'Run cabal REPL in split' })
+
+vim.keymap.set('n', '<C-h>', '<C-w><C-h>', { desc = 'Move focus to the left window' })
+vim.keymap.set('n', '<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right window' })
+vim.keymap.set('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
+vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })

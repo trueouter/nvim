@@ -1,15 +1,16 @@
 return { 
-  "catppuccin/nvim", 
-   nvimname = "catppuccin", 
+  "catppuccin/nvim",
+   name = "catppuccin",
    priority = 1000,
    lazy = false,
    config = function()
-     vim.cmd.colorscheme "catppuccin"
      require('catppuccin').setup({
-       flavour = "auto",
+       flavour = "auto", -- Hardcode to light
        background = {
          light = 'latte',
-         dark = 'mocha'
-       }})
+         dark = 'mocha',
+       },
+     })
+     vim.cmd.colorscheme "catppuccin"
    end
  }
