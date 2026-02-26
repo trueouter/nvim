@@ -37,6 +37,14 @@ vim.diagnostic.config({
   severity_sort = true,
 })
 
+-- Register Razor filetypes early so roslyn.nvim's ft trigger works
+vim.filetype.add({
+  extension = {
+    razor = 'razor',
+    cshtml = 'razor',
+  },
+})
+
 -- Open neo-tree automatically when nvim is launched with a directory
 vim.api.nvim_create_autocmd('VimEnter', {
   once = true,

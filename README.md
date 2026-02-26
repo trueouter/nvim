@@ -1,5 +1,50 @@
 # Neovim Config
 
+## Prerequisites
+
+### System Tools
+
+These must be installed **before** launching Neovim:
+
+| Tool | Why | Install (macOS) |
+|------|-----|-----------------|
+| `git` | Plugin manager bootstrap | `brew install git` |
+| `make` | Build `telescope-fzf-native` | Xcode CLT / `brew install make` |
+| `ripgrep` | Telescope live-grep | `brew install ripgrep` |
+| `.NET SDK` | Roslyn LSP (C# / Razor) | `brew install dotnet` |
+| GHCup (`ghcup`, `cabal`) | HLS + cabal REPL | [ghcup.haskell.org](https://www.haskell.org/ghcup/) |
+| JDK 17+ | Java (jdtls) | `brew install openjdk` |
+| Node.js / npm | Mason-installed JS/HTML/CSS servers | `brew install node` |
+
+### LSP Servers (Mason)
+
+Installed **automatically** by mason-lspconfig on first launch:
+
+`lua_ls` · `hls` · `html` · `cssls` · `ts_ls`
+
+Install **manually** via `:MasonInstall`:
+
+```
+:MasonInstall roslyn
+:MasonInstall jdtls
+```
+
+> `roslyn` comes from the [Crashdummyy/mason-registry](https://github.com/Crashdummyy/mason-registry), which is already configured.
+
+### Formatters (Mason)
+
+Used by conform.nvim — install via `:MasonInstall`:
+
+```
+:MasonInstall stylua csharpier prettier
+```
+
+| Formatter | Languages |
+|-----------|-----------|
+| `stylua` | Lua |
+| `csharpier` | C# |
+| `prettier` | HTML, CSS, JS, TS, JSX, TSX |
+
 ## Keymaps
 
 Leader key: `Space`
@@ -19,7 +64,7 @@ Leader key: `Space`
 | `<leader>sf` | Find files |
 | `<leader>sg` | Live grep |
 | `<leader>sw` | Grep word under cursor |
-| `<leader>sd` | Search diagnostics |
+| `<leader>sd` | Search diagnostics (all buffers) |
 | `<leader>sh` | Search help tags |
 | `<leader>sk` | Search keymaps |
 | `<leader>sr` | Resume last search |
@@ -45,7 +90,10 @@ Leader key: `Space`
 | `grn` | Rename symbol |
 | `gra` | Code action |
 | `]d` / `[d` | Next / previous diagnostic |
-| `<leader>q` | Diagnostics quickfix list |
+| `gl` | Diagnostic float (message under cursor) |
+| `<leader>q` | Diagnostics → location list (current buffer) |
+| `<leader>d` | Diagnostics → Telescope picker (current buffer) |
+| `<leader>D` | Diagnostics → Telescope picker (workspace) |
 
 ### Completion (insert mode)
 

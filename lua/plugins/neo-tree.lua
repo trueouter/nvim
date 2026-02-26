@@ -12,6 +12,7 @@ return {
       require('neo-tree').setup({
         filesystem = {
           --hijack_netrw_behavior = 'disabled',  -- don't let neo-tree change cwd
+          use_libuv_file_watcher = true,
         },
       })
       vim.keymap.set('n', '<leader>n', ':Neotree toggle<CR>', { desc = 'Toggle [N]eotree' })

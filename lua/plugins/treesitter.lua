@@ -3,9 +3,9 @@ return {
   lazy = false,
   build = ':TSUpdate',
   config = function()
-    -- Change 'configs' to 'config'
     require('nvim-treesitter.config').setup({
-      ensure_installed = { 'bash', 'c', 'diff', 'haskell', 'html', 'lua', 'luadoc', 'markdown', 'markdown_inline', 'query', 'vim', 'vimdoc' },
+      ensure_installed = { 'c_sharp', 'bash', 'c', 'css', 'diff', 'haskell', 'html', 'java', 'javascript', 'jsdoc', 'lua', 'luadoc', 'markdown', 'markdown_inline', 'query', 'razor', 'tsx', 'typescript', 'vim', 'vimdoc' },
+      auto_install = true,
       highlight = { enable = true },
     })
   end

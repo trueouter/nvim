@@ -5,9 +5,11 @@ return {
       'hrsh7th/cmp-nvim-lsp',   -- LSP completions
       'hrsh7th/cmp-buffer',      -- words from current buffer
       'hrsh7th/cmp-path',        -- filesystem paths
+      'onsails/lspkind-nvim',    -- icons in completion menu
     },
     config = function()
       local cmp = require('cmp')
+      local lspkind = require('lspkind')
 
       cmp.setup({
         mapping = cmp.mapping.preset.insert({
@@ -24,6 +26,13 @@ return {
           { name = 'buffer' },
           { name = 'path' },
         }),
+        formatting = {
+          format = lspkind.cmp_format({
+            mode = 'symbol_text',
+            maxwidth = 50,
+            ellipsis_char = '...',
+          }),
+        },
         experimental = {
           ghost_text = true,  -- shows preview of first completion inline
         },
